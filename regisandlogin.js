@@ -50,6 +50,7 @@ query.get().then((querySnapshot) => {
         li.classList.add('list-group-item');
         messagesList.appendChild(li);
     });
+    
 }).catch((error) => {
     console.error("Hiba a regisztrálásnál: ", error);
 });
