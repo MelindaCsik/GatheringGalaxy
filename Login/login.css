@@ -1,0 +1,48 @@
+header{
+    background: #313B64;
+    height: 80px;
+    color: #8F85D8;
+}
+header>div>h2{
+    
+}
+#box{
+    border: 5px solid #2b1d5a;
+    border-radius: 10px;
+    background-color: #282b75;
+}
+#box>.form>form>input{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #4c1c46;
+}
+#box>.form>form>input::placeholder{
+    color: #a296ca;
+}
+#box>.form>form>input:hover{
+    background-color: #756c93;
+}
+#box>.form>form>input:hover::placeholder{
+    color: #4c1c46;
+}
+p{
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.399);
+    color: #161017;
+    font-size: 20px;
+}
+button{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #63255b;
+    color: #a296ca;
+}
+a{
+    color: #161017;
+}
+a:hover{
+    color: #76396e;
+}
+button:hover{
+    background-color: #4a1b44;
+    color: #dd9fd5;
+}
