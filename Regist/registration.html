@@ -4,26 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="registjs"></script>
+    <link rel="shortcut icon" type="image/ico" href="../img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="regisandlogin.js"></script>
+    <link rel="stylesheet" href="login.css">
     <title>Regisztráció</title>
 </head>
 <body>
     <header>
-        <h2>GatheringGalaxy</h2>
+        <div class="row">
+            <div class="col-0">
+                <a href="../index.html"><img src="../img/result.png" height="40"></a> 
+            </div>
+            <div class="col-1">
+                <h2>GatheringGalaxy</h2>
+            </div>
+        </div>
     </header>
-    <div clas="">
-        <h2>Regisztráció</h2>
-        <form>
-            <input type="text" id="username" name="username" placeholder="Felhasználónév"><br>
-            <input type="text" id="email" name="email" placeholder="Email cím"><br>
-            <input type="text" id="password" name="password" placeholder="Jelszó"><br>
-            <input type="text" id="againp" name="againp" placeholder="Jelszó megerősítés"><br>
-            <input type="checkbox" id="data" name="data">
-            <label for="data"> Elfogadom, hogy a fent megadott adatokat az oldal tárolja és az 
-                <a href="adavedelmi.html">adatvédelmi nyilatkozatban</a> rögzített céllal kezelje.</label><br>        
-        </form>
-        <p>Már fiókod?<br> <a href="login.html">Jelentkezz be!</a></p>
-    <button type="button" onclick="">Regisztrálás</button>
+    <div class="container">
+        <div id="box">
+            <div class="form">
+                <h2>Regisztráció</h2>
+                <form>
+                    <input type="text" id="username" name="username" placeholder="Felhasználónév"><br>
+                    <input type="text" id="email" name="email" placeholder="Email cím"><br>
+                    <input type="text" id="password" name="password" placeholder="Jelszó"><br>
+                    <input type="text" id="againp" name="againp" placeholder="Jelszó megerősítés"><br>
+                    <input type="checkbox" id="data" name="data">
+                    <label for="data"> Elfogadom, az
+                    <a href="adavedelmi.html">adatvédelmi nyilatkozatot</a></label><br>          
+                </form>
+                <p>Még nincs fiókod?<br> <a href="../Regist/registration.html">Regisztrálj!</a></p>
+                <button type="button" onclick="">Bejelentkezés</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
