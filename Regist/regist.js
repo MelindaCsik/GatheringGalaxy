@@ -1,5 +1,7 @@
 
 import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword} from "firebase/app";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCFjj2TpErZVY8UAW8vYudUSivqVxy0wKo",
@@ -12,45 +14,30 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
 const db = firebase.firestore(app);
 
 const title = document.getElementById('username').value.trim();
 const author = document.getElementById('email').value.trim();
 const published = document.getElementById('password').value.trim();
-const available = document.getElementById('againp').value;
 
 let query = db.collection("felhasznalok");
 
-db.collection("felhasznalok").onSnapshot((querySnapshot) => {
-    const documents = querySnapshot.docs;
-    for (let i = 0; i < documents.length; i++) {
-        console.log(documents[i].data());
-    }
+let regist = document.getElementById("regist");
+
+regist.addEventListener("click", (e) => {
+    let username = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    createUserWithEmailAndPassword(auth, username, email, password).then((userCredentials) => {
+        alert("Felhasználó sikeres regisztrálva");
+        const user = userCredentials.user;
+        console.log(user);
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    })
 });
 
-db.collection("felhasznalok").onSnapshot((querySnapshot) => {
-    const messagesList = document.getElementById('konyv-list');
-    messagesList.innerHTML = '';
-    const documents = querySnapshot.docs;
-    for (let i = 0; i < documents.length; i++) {
-        let msg = documents[i].data();
-        const li = document.createElement('li');
-        li.classList.add('list-group-item');
-        li.innerText = `${msg.password}: ${msg.szoveg}: ${msg.stat}`;
-        messagesList.appendChild(li);
-    }
-});
-
-query.get().then((querySnapshot) => {
-    const messagesList = document.getElementById('konyv-list');
-    messagesList.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const li = document.createElement('li');
-        li.classList.add('list-group-item');
-        messagesList.appendChild(li);
-    });
-    
-}).catch((error) => {
-    console.error("Hiba a regisztrálásnál: ", error);
-});
