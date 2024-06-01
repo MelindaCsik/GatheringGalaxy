@@ -23,14 +23,19 @@
     <div class="container">
         <div id="box">
             <div class="form">
-                <form>
-                    <input type="text" id="email" name="email" placeholder="Email cím"><br>
-                    <input type="text" id="password" name="password" placeholder="Jelszó">        
+                <form id="loginForm">
+                    <input type="email" id="email" name="email" placeholder="Email cím"><br>
+                    <input type="password" id="password" name="password" placeholder="Jelszó">        
                 </form>
                 <p>Még nincs fiókod?<br> <a href="../Regist/registration.html">Regisztrálj!</a></p>
-                <button type="button" onclick="">Bejelentkezés</button>
+                <button type="button" onclick="login()">Bejelentkezés</button>
             </div>
         </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>

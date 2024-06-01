@@ -32,12 +32,12 @@ document.getElementById("registrationForm").addEventListener("submit", (e) => {
             });
         })
         .then(() => {
-            console.log("User data stored in Firestore");
+            console.log("Felhasználói adatok elmentve!");
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.error(`Error [${errorCode}]: ${errorMessage}`);
+            console.error(`Hiba [${errorCode}]: ${errorMessage}`);
             alert(`Hiba: ${errorMessage} (Hibakód: ${errorCode})`);
         });
 });
