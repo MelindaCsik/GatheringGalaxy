@@ -1,8 +1,3 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCFjj2TpErZVY8UAW8vYudUSivqVxy0wKo",
     authDomain: "gatheringalaxy.firebaseapp.com",
@@ -12,23 +7,32 @@ const firebaseConfig = {
     appId: "1:639862837184:web:b56be4ef49e3dbbcef4225"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-let regist = document.getElementById("regist");
-
-regist.addEventListener("click", (e) => {
+document.getElementById("registrationForm").addEventListener("submit", (e) => {
     e.preventDefault(); 
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
 
-    createUserWithEmailAndPassword(auth, email, password)
+    auth.createUserWithEmailAndPassword(email, password)
         .then((userCredentials) => {
             alert("Sikeres felhasználó registrálás");
             const user = userCredentials.user;
             console.log(user);
+
+            return db.collection("felhasznalok").doc(user.uid).set({
+                email: user.email,
+                username: username,
+                uid: user.uid,
+                registrationDate: new Date().toISOString()
+            });
+        })
+        .then(() => {
+            console.log("User data stored in Firestore");
         })
         .catch((error) => {
             const errorCode = error.code;
