@@ -21,7 +21,7 @@ function login() {
         .then((userCredential) => {
             const user = userCredential.user;
             alert("Sikeres bejelentkezés mint: " + user.email);
-            window.location.href = "../index.html";
+            window.location.href = "../mainpage.html";
         })
         .catch((error) => {
             const errorCode = error.code;

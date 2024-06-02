@@ -33,6 +33,7 @@ document.getElementById("registrationForm").addEventListener("submit", (e) => {
         })
         .then(() => {
             console.log("Felhasználói adatok elmentve!");
+            window.location.href = "../mainpage.html";
         })
         .catch((error) => {
             const errorCode = error.code;
