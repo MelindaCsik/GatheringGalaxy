@@ -4,23 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Nyitólap</title>
-    <script>
-        if (localStorage.getItem('firstVisit') === null) {
-            window.location.href = "Regist/registration.html";
-            localStorage.setItem('firstVisit', 'true');
-        } else {
-            window.location.href = "login/login.html";
-        }
-    </script>
+    <title>Main Page</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
-    <header>
-        <h2>GatheringGalaxy</h2>
-        <div class="right">
-            <img src="" alt="">
-        </div>
-    </header>
+    <div>
+        <h3>Events</h3>
+        <div id="eventsContainer"></div>
+        <script src="main.js"></script>
+    </div>
 </body>
 </html>
