@@ -8,43 +8,67 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", () => {
     const eventsContainer = document.getElementById("eventsContainer");
 
-    db.collection("events").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            const event = doc.data();
-            const eventElement = document.createElement("div");
-            eventElement.innerHTML = `
-                <h4>${event.title}</h4>
-                <p>${event.description}</p>
-                <p>${new Date(event.date).toLocaleString()}</p>
-                <button onclick="registerForEvent('${doc.id}')">Register</button>
-            `;
-            eventsContainer.appendChild(eventElement);
-        });
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            db.collection("events").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const event = doc.data();
+                    const eventElement = document.createElement("div");
+                    eventElement.innerHTML = `
+                        <h4>${event.title}</h4>
+                        <p>${event.description}</p>
+                        <p>${new Date(event.date).toLocaleString()}</p>
+                        ${event.createdBy === user.uid ? `
+                            <button onclick="deleteEvent('${doc.id}')">Törlés</button>
+                        ` : ''}
+                        <button onclick="registerForEvent('${doc.id}')">Regisztráció</button>
+                    `;
+                    eventsContainer.appendChild(eventElement);
+                });
+            });
+        }
     });
 });
 
 function registerForEvent(eventId) {
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
         if (user) {
             db.collection("eventRegistrations").add({
                 eventId: eventId,
                 userId: user.uid
             })
             .then(() => {
-                alert("Successfully registered for the event.");
+                alert("Sikeresen regisztráltál erre az eseményre.");
             })
             .catch((error) => {
-                console.error("Error registering for event: ", error);
-                alert("Error: " + error.message);
+                console.error("Hiba az esemény regisztrálásánál: ", error);
+                alert("Hiba: " + error.message);
             });
         } else {
-            alert("You must be logged in to register for an event.");
+            alert("Be kell jelentkezned ahhoz hogy regisztrálni tudjál egy eseményre.");
             window.location.href = "Login/login.html";
+        }
+    });
+}
+
+function deleteEvent(eventId) {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            db.collection("events").doc(eventId).delete()
+                .then(() => {
+                    alert("Az esemény sikeresen törölve");
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error("Hiba az esemény törlésekor: ", error);
+                    alert("Hiba: " + error.message);
+                });
         }
     });
 }
