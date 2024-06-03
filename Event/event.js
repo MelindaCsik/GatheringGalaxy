@@ -27,15 +27,15 @@ document.getElementById("eventForm").addEventListener("submit", (e) => {
                 createdBy: user.uid
             })
             .then(() => {
-                alert("Event created successfully");
+                alert("Esemény sikeres létrehozása");
                 window.location.href = "../mainpage.html";
             })
             .catch((error) => {
-                console.error("Error creating event: ", error);
+                console.error("Hiba az esemény létrehozásakor: ", error);
                 alert("Error: " + error.message);
             });
         } else {
-            alert("You must be logged in to create an event.");
+            alert("Be kell jelentkezned hogy egy eseményt tudjál létrehozni");
             window.location.href = "../Login/login.html";
         }
     });
